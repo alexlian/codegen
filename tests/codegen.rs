@@ -419,6 +419,29 @@ enum IpAddrKind {
 }
 
 #[test]
+fn enum_variant() {
+    let mut scope = Scope::new();
+
+    let mut v = Variant::new("V4");
+    v.attr("test");
+    v.doc("IP V4 Address Type");
+    scope
+        .new_enum("IpAddrKind")
+        .push_variant(v)
+        .push_variant(Variant::new("V6"));
+
+    let expect = r#"
+enum IpAddrKind {
+    #[test]
+    /// IP V4 Address Type
+    V4,
+    V6,
+}"#;
+
+    assert_eq!(scope.to_string(), &expect[1..]);
+}
+
+#[test]
 fn scoped_imports() {
     let mut scope = Scope::new();
     scope

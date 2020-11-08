@@ -2,6 +2,7 @@
 
 ### Changed
 - updated the crate to rust 2018 edition
+- Add support for doc and annotations to enum variants
 
 # 0.1.3 (May 9, 2020)
 
