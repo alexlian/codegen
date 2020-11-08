@@ -84,13 +84,7 @@ impl Impl {
     where
         T: Into<Type>,
     {
-        self.assoc_tys.push(Field {
-            name: name.to_string(),
-            ty: ty.into(),
-            documentation: Vec::new(),
-            annotation: Vec::new(),
-        });
-
+        self.assoc_tys.push(Field::new(name, ty));
         self
     }
 

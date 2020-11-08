@@ -50,6 +50,7 @@ fn single_struct_documented_field() {
     let mut struct_ = Struct::new("Foo");
 
     let mut field1 = Field::new("one", "usize");
+    field1.vis("pub");
     field1.doc(doc.clone());
     struct_.push_field(field1);
 
@@ -70,7 +71,7 @@ fn single_struct_documented_field() {
 struct Foo {
     /// Field's documentation
     /// Second line
-    one: usize,
+    pub one: usize,
     #[serde(rename = "bar")]
     two: usize,
     /// Field's documentation

@@ -32,12 +32,7 @@ impl Fields {
     where
         T: Into<Type>,
     {
-        self.push_named(Field {
-            name: name.to_string(),
-            ty: ty.into(),
-            documentation: Vec::new(),
-            annotation: Vec::new(),
-        })
+        self.push_named(Field::new(name, ty))
     }
 
     pub fn tuple<T>(&mut self, ty: T) -> &mut Self
@@ -74,7 +69,11 @@ impl Fields {
                                 write!(fmt, "{}\n", ann)?;
                             }
                         }
-                        write!(fmt, "{}: ", f.name)?;
+                        if let Some(vis) = &f.vis {
+                            write!(fmt, "{} {}: ", vis, f.name)?;
+                        } else {
+                            write!(fmt, "{}: ", f.name)?;
+                        }
                         f.ty.fmt(fmt)?;
                         write!(fmt, ",\n")?;
                     }
