@@ -1,12 +1,26 @@
-use std::fmt::{self, Write};
+use std::{
+    cmp::Ordering,
+    fmt::{self, Write},
+};
 
 use crate::formatter::Formatter;
 
 /// Defines a type.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Type {
     name: String,
     generics: Vec<Type>,
+}
+
+impl Ord for Type {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.name.cmp(&other.name)
+    }
+}
+impl PartialOrd for Type {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
 }
 
 impl Type {
@@ -16,6 +30,11 @@ impl Type {
             name: name.to_string(),
             generics: vec![],
         }
+    }
+
+    /// Return the name for the type
+    pub fn name(&self) -> &str {
+        &self.name
     }
 
     /// Add a generic to the type.

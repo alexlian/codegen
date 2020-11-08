@@ -1,4 +1,7 @@
-use std::fmt::{self, Write};
+use std::{
+    cmp::Ordering,
+    fmt::{self, Write},
+};
 
 use crate::bound::Bound;
 use crate::docs::Docs;
@@ -7,7 +10,7 @@ use crate::formatter::{fmt_bounds, Formatter};
 use crate::r#type::Type;
 
 /// Defines a type definition.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct TypeDef {
     pub ty: Type,
     vis: Option<String>,
@@ -17,6 +20,17 @@ pub struct TypeDef {
     repr: Option<String>,
     bounds: Vec<Bound>,
     macros: Vec<String>,
+}
+
+impl Ord for TypeDef {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.ty.cmp(&other.ty)
+    }
+}
+impl PartialOrd for TypeDef {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
 }
 
 impl TypeDef {

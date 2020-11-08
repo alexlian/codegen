@@ -1,7 +1,7 @@
 use crate::r#type::Type;
 
 /// Defines a struct field.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Field {
     /// Field name
     pub name: String,

@@ -6,7 +6,7 @@ use crate::formatter::Formatter;
 use crate::r#type::Type;
 
 /// Defines a set of fields.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub enum Fields {
     Empty,
     Tuple(Vec<Type>),

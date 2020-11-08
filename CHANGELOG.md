@@ -2,6 +2,8 @@
 
 ### Changed
 - updated the crate to rust 2018 edition
+- Add Ordering support for Struct and associated types
+- Add inspection of Type name
 
 # 0.1.3 (May 9, 2020)
 

@@ -2,7 +2,7 @@ use std::fmt::{self, Write};
 
 use crate::formatter::Formatter;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Docs {
     docs: String,
 }

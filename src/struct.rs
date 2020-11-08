@@ -1,4 +1,7 @@
-use std::fmt::{self, Write};
+use std::{
+    cmp::Ordering,
+    fmt::{self, Write},
+};
 
 use crate::field::Field;
 use crate::fields::Fields;
@@ -8,12 +11,24 @@ use crate::type_def::TypeDef;
 use crate::r#type::Type;
 
 /// Defines a struct.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Struct {
     type_def: TypeDef,
 
     /// Struct fields
     fields: Fields,
+}
+
+impl Ord for Struct {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.type_def.cmp(&other.type_def)
+    }
+}
+
+impl PartialOrd for Struct {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
 }
 
 impl Struct {
