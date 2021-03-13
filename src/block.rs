@@ -13,9 +13,12 @@ pub struct Block {
 
 impl Block {
     /// Returns an empty code block.
-    pub fn new(before: &str) -> Self {
+    pub fn new<T>(before: T) -> Self
+    where
+      T: Into<String>,
+    {
         Block {
-            before: Some(before.to_string()),
+            before: Some(before.into()),
             after: None,
             body: vec![],
         }
@@ -24,9 +27,9 @@ impl Block {
     /// Push a line to the code block.
     pub fn line<T>(&mut self, line: T) -> &mut Self
     where
-        T: ToString,
+        T: Into<String>,
     {
-        self.body.push(Body::String(line.to_string()));
+        self.body.push(Body::String(line.into()));
         self
     }
 

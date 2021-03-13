@@ -163,11 +163,11 @@ impl Function {
     /// Push a line to the function implementation.
     pub fn line<T>(&mut self, line: T) -> &mut Self
     where
-        T: ToString,
+        T: Into<String>,
     {
         self.body
             .get_or_insert(vec![])
-            .push(Body::String(line.to_string()));
+            .push(Body::String(line.into()));
 
         self
     }
